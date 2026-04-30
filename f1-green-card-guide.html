@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F-1 Student · Pending Green Card Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f5f7;
+    --surface: #ffffff;
+    --border: #e0e0e5;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-tertiary: #8e8e93;
+    --accent: #0066cc;
+    --accent-soft: #e8f0fb;
+    --warning: #ff9500;
+    --warning-soft: #fff4e0;
+    --success: #34c759;
+    --success-soft: #e8f9ee;
+    --danger: #ff3b30;
+    --danger-soft: #fff0ef;
+    --step-num: #0066cc;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .doc-header {
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .doc-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .doc-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .doc-subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  /* Progress bar */
+  .progress-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 32px 0 0;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .prog-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 64px;
+  }
+
+  .prog-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .prog-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 6px;
+    line-height: 1.3;
+    max-width: 56px;
+  }
+
+  .prog-line {
+    height: 2px;
+    flex: 1;
+    background: var(--border);
+    margin-top: -18px;
+    position: relative;
+    z-index: 0;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .step-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .card-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+    line-height: 1.3;
+  }
+
+  .card-timing {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+
+  .card-body {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* Highlight box */
+  .highlight {
+    background: var(--warning-soft);
+    border-left: 3px solid var(--warning);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 13.5px;
+    color: var(--text-primary);
+    margin-top: 14px;
+    line-height: 1.55;
+  }
+
+  .highlight strong { font-weight: 600; }
+
+  /* Bullet list */
+  .action-list {
+    list-style: none;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .action-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .action-list li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* Source link */
+  .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 14px;
+    padding: 5px 10px;
+    background: var(--accent-soft);
+    border-radius: 20px;
+    transition: opacity 0.15s;
+  }
+
+  .source-link:hover { opacity: 0.75; }
+
+  .source-link svg { flex-shrink: 0; }
+
+  .source-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  /* Grace period row */
+  .grace-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .grace-item {
+    background: var(--accent-soft);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    text-align: center;
+  }
+
+  .grace-item .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .grace-item .lbl {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Table */
+  .outcome-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 13.5px;
+  }
+
+  .outcome-table thead tr {
+    background: var(--bg);
+  }
+
+  .outcome-table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .outcome-table td {
+    padding: 13px 14px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .outcome-table tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .badge-success { background: var(--success-soft); color: #1a7a37; }
+  .badge-danger  { background: var(--danger-soft);  color: #c0392b; }
+
+  /* Risk card */
+  .risk-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .risk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 13px 14px;
+  }
+
+  .risk-icon {
+    font-size: 17px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .risk-text {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 600px) {
+    .doc-title { font-size: 22px; }
+    .grace-row { grid-template-columns: 1fr 1fr; }
+    .progress-track { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header class="doc-header">
+    <div class="doc-tag">DSO Reference Guide</div>
+    <h1 class="doc-title">F-1 Student · Pending Green Card<br>No Next Semester Enrollment</h1>
+    <p class="doc-subtitle">Step-by-step process for Designated School Officials managing AOS transition</p>
+
+    <!-- Progress -->
+    <div class="progress-track">
+      <div class="prog-step">
+        <div class="prog-dot">1</div>
+        <div class="prog-label">Assess</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot">2</div>
+        <div class="prog-label">Monitor</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot">3</div>
+        <div class="prog-label">Pre-Term</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot">4</div>
+        <div class="prog-label">Post-Term</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot">5</div>
+        <div class="prog-label">AOS</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot">6</div>
+        <div class="prog-label">Risks</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Step 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">1</div>
+      <div>
+        <div class="card-title">Initial Assessment</div>
+        <div class="card-timing">Immediately upon notification</div>
+      </div>
+    </div>
+    <div class="card-body">
+      Confirm the pending I-485 application via I-797C receipt notice. Document the student's written intent not to enroll and to pursue Adjustment of Status instead.
+    </div>
+    <div class="highlight">
+      <strong>⚠️ Advise student:</strong> No work authorization, international travel, or F-1 benefits while AOS is pending and SEVIS is active.
+    </div>
+    <div class="source-links">
+      <a class="source-link" href="https://www.boundless.com/immigration-resources/sevis-termination-what-f-1-students-need-to-know" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Boundless · SEVIS Termination Guide
+      </a>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">2</div>
+      <div>
+        <div class="card-title">Monitor Enrollment Deadline</div>
+        <div class="card-timing">Ongoing until session start</div>
+      </div>
+    </div>
+    <div class="card-body">
+      Do <strong>not</strong> manually terminate the SEVIS record. Allow the system to auto-terminate for <strong>"Failure to Enroll"</strong> approximately 90 days after the next session start date if the student does not register.
+    </div>
+    <div class="grace-row" style="margin-top:14px">
+      <div class="grace-item">
+        <div class="num">~90</div>
+        <div class="lbl">Days after session start for auto-termination</div>
+      </div>
+      <div class="grace-item">
+        <div class="num">0</div>
+        <div class="lbl">DSO manual actions required during this phase</div>
+      </div>
+    </div>
+    <div class="source-links">
+      <a class="source-link" href="https://www.adhikarilaw.com/news-and-alerts/f-1-student-visa-revocation-and-sevis-termination-and-their-legal-implications/" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Adhikari Law · F-1 SEVIS Termination
+      </a>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">3</div>
+      <div>
+        <div class="card-title">Pre-Termination Actions</div>
+        <div class="card-timing">Before auto-termination occurs</div>
+      </div>
+    </div>
+    <div class="card-body">
+      Issue a school letter to the student covering all relevant status points.
+    </div>
+    <ul class="action-list">
+      <li>Confirms F-1 status maintained to date of non-enrollment</li>
+      <li>Documents student's voluntary decision not to enroll</li>
+      <li>Notes pending AOS (I-485) filed with USCIS</li>
+      <li>States no further F-1 obligations exist post-termination</li>
+    </ul>
+    <div class="highlight" style="background: var(--success-soft); border-color: var(--success);">
+      <strong>✓ Note:</strong> The student remains in an authorized period of stay while the AOS petition is pending — regardless of SEVIS status.
+    </div>
+    <div class="source-links">
+      <a class="source-link" href="https://www.avvo.com/legal-answers/will-a-terminated-failed-to-enroll-sevis-record-ca-6247979.html" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Avvo · Terminated SEVIS & AOS
+      </a>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">4</div>
+      <div>
+        <div class="card-title">Post Auto-Termination</div>
+        <div class="card-timing">Day of termination + 15-day grace period</div>
+      </div>
+    </div>
+    <div class="card-body">
+      SEVIS ends the student's F-1 status upon auto-termination. A 15-day grace period follows, during which the student must either depart the U.S. or maintain AOS coverage.
+    </div>
+    <div class="grace-row">
+      <div class="grace-item">
+        <div class="num">15</div>
+        <div class="lbl">Grace period days to depart or maintain AOS</div>
+      </div>
+      <div class="grace-item">
+        <div class="num">$0</div>
+        <div class="lbl">Unlawful presence accrued during pending AOS</div>
+      </div>
+    </div>
+    <div class="source-links">
+      <a class="source-link" href="https://www.adhikarilaw.com/news-and-alerts/f-1-student-visa-revocation-and-sevis-termination-and-their-legal-implications/" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Adhikari Law · Post-Termination Rules
+      </a>
+    </div>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">5</div>
+      <div>
+        <div class="card-title">AOS Outcomes</div>
+        <div class="card-timing">Upon USCIS decision</div>
+      </div>
+    </div>
+    <div class="card-body">
+      Actions depend on the final USCIS determination.
+    </div>
+    <table class="outcome-table">
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>Required Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-success">✓ Approved</span><br>Green card issued</td>
+          <td>Update SEVIS to <strong>"Changed to Permanent Resident."</strong> Student transitions to LPR status. No further F-1 obligations.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-danger">✗ Denied / Withdrawn</span></td>
+          <td>Advise reinstatement via Form I-539 within 5 months (if eligible), or advise immediate departure. Student may not reenter on current F-1 visa.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="source-links">
+      <a class="source-link" href="https://www.reddit.com/r/USCIS/comments/1ortb8e/when_is_the_right_time_to_terminate_my_f1_status/" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        r/USCIS · F-1 Status Termination Timing
+      </a>
+      <a class="source-link" href="https://www.boundless.com/immigration-resources/sevis-termination-what-f-1-students-need-to-know" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Boundless · SEVIS After Denial
+      </a>
+    </div>
+  </div>
+
+  <!-- Step 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">6</div>
+      <div>
+        <div class="card-title">Risks &amp; Ongoing Guidance</div>
+        <div class="card-timing">Throughout entire process</div>
+      </div>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="risk-icon">⚠️</div>
+        <div class="risk-text"><strong>Future visa impact:</strong> A "Failure to Enroll" termination code may complicate future U.S. visa applications if AOS is ultimately denied.</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon">⚖️</div>
+        <div class="risk-text"><strong>Legal counsel:</strong> Student should consult a qualified immigration attorney at every stage of this process.</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon">🖥️</div>
+        <div class="risk-text"><strong>SEVIS monitoring:</strong> School monitors SEVIS via the CLAIMS interface for USCIS status updates on the pending AOS.</div>
+      </div>
+    </div>
+    <div class="source-links">
+      <a class="source-link" href="https://www.boundless.com/immigration-resources/sevis-termination-what-f-1-students-need-to-know" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Boundless · Risk Overview
+      </a>
+      <a class="source-link" href="https://www.adhikarilaw.com/news-and-alerts/f-1-student-visa-revocation-and-sevis-termination-and-their-legal-implications/" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M7 1h4v4M11 1L5.5 6.5M3 3H1v8h8V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Adhikari Law · DSO Guidance
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    This document is for DSO reference only and does not constitute legal advice.<br>
+    Always coordinate with a licensed immigration attorney for individual student cases.
+  </div>
+
+</div>
+</body>
+</html>
